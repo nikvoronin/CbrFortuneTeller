@@ -5,16 +5,18 @@
 
 ## Installation
 
-- Prepare MS SQL 2014 database.
-- Configure "connectionString" in Medium.exe.config and Scraper.exe.config.
+- Prepare `MS SQL 2014` database.
+- Configure `connectionString` in `Medium.exe.config` and `Scraper.exe.config`.
 - Install [R-language](https://cran.gis-lab.info/) (both x86 and x64 versions).
-- Run the Scraper.
-- Run the Medium and would get you prediction.
+- Run the `Scraper`.
+- Start the `Medium` and would get your prediction.
 
 
 ## The Scraper
 
+```
 scraper.exe scrape -f2016-01-01 -t2016-09-01
+```
 
 - clear - Clean data base table.
 - scrape - Scrape currencies values.
@@ -24,21 +26,23 @@ scraper.exe scrape -f2016-01-01 -t2016-09-01
 
 ### scrape
 
--d, --delay                     (Default: 1000) Download delay in ms.<br/>
--r, --delay-after-n-requests    (Default: 30) Should delay after N requests<br/>
--f, --from                      From which date should begin: DD-MM-YYYY<br/>
--t, --to                        Which date should finish: DD-MM-YYYY<br/>
+-d, --delay - (Default: 1000) Download delay in ms.<br/>
+-r, --delay-after-n-requests - (Default: 30) Should delay after N requests<br/>
+-f, --from - From which date should begin: DD-MM-YYYY<br/>
+-t, --to - Which date should finish: DD-MM-YYYY<br/>
 
 
 ### clear
 
--f, --from    From which date should begin: DD-MM-YYYY<br/>
--t, --to      Which date should finish: DD-MM-YYYY<br/>
+-f, --from - From which date should begin: DD-MM-YYYY<br/>
+-t, --to - Which date should finish: DD-MM-YYYY<br/>
 
 
 ## The Medium
 
+```
 medium.exe next -cEUR -n7 --from2016-01-01
+```
 
 - list - Prints list of the currencies.
 - next - Options for regression analisys.
@@ -48,8 +52,8 @@ medium.exe next -cEUR -n7 --from2016-01-01
 
 ### next
 
--c, --code               Required. (Default: USD) 3-symbols code of the currency<br/>
--o, --output-filename    Where to store prediciton<br/>
--n, --next               Required. (Default: 1) After how many days to make a prediction<br/>
--f, --from               From which date should begin: DD-MM-YYYY<br/>
--t, --to                 Which date should finish: DD-MM-YYYY<br/>
+-c, --code - Required. (Default: USD) 3-symbols code of the currency<br/>
+-o, --output-filename - Where to store prediciton<br/>
+-n, --next - Required. (Default: 1) After how many days to make a prediction<br/>
+-f, --from - From which date should begin: DD-MM-YYYY<br/>
+-t, --to - Which date should finish: DD-MM-YYYY<br/>
