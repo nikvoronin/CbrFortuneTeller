@@ -24,16 +24,16 @@ scraper.exe scrape -f2016-01-01 -t2016-09-01
 
 ### scrape
 
--d, --delay                     (Default: 1000) Download delay in ms.
--r, --delay-after-n-requests    (Default: 30) Should delay after N requests
--f, --from                      From which date should begin: DD-MM-YYYY
--t, --to                        Which date should finish: DD-MM-YYYY
+-d, --delay                     (Default: 1000) Download delay in ms.<br/>
+-r, --delay-after-n-requests    (Default: 30) Should delay after N requests<br/>
+-f, --from                      From which date should begin: DD-MM-YYYY<br/>
+-t, --to                        Which date should finish: DD-MM-YYYY<br/>
 
 
 ### clear
 
--f, --from    From which date should begin: DD-MM-YYYY
--t, --to      Which date should finish: DD-MM-YYYY
+-f, --from    From which date should begin: DD-MM-YYYY<br/>
+-t, --to      Which date should finish: DD-MM-YYYY<br/>
 
 
 ## The Medium
@@ -48,8 +48,8 @@ medium.exe next -cEUR -n7 --from2016-01-01
 
 ### next
 
--c, --code               Required. (Default: USD) 3-symbols code of the currency
--o, --output-filename    Where to store prediciton
--n, --next               Required. (Default: 1) After how many days to make a prediction
--f, --from               From which date should begin: DD-MM-YYYY
--t, --to                 Which date should finish: DD-MM-YYYY
+-c, --code               Required. (Default: USD) 3-symbols code of the currency<br/>
+-o, --output-filename    Where to store prediciton<br/>
+-n, --next               Required. (Default: 1) After how many days to make a prediction<br/>
+-f, --from               From which date should begin: DD-MM-YYYY<br/>
+-t, --to                 Which date should finish: DD-MM-YYYY<br/>
