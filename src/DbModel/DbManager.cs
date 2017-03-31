@@ -20,10 +20,7 @@ namespace CbrFT.DbModel
 
             using (DbModelContext context = new DbModelContext())
             {
-                var cs = from c in context.Currencies
-                         select c;
-
-                currencies = cs?.ToList();
+                currencies = context.Currencies.ToList();
             }
 
             return currencies;
@@ -43,14 +40,12 @@ namespace CbrFT.DbModel
 
             using (DbModelContext context = new DbModelContext())
             {
-                var cvs = from v in context.CurrencyValues
-                          where (v.Currency.VchCode == VchCode.Trim()) &&
+                values = context.CurrencyValues
+                    .Where(v => (v.Currency.VchCode == VchCode.Trim()) &&
                                 (v.OnDate >= fromDate) &&
-                                (v.OnDate <= toDate)
-                          orderby v.OnDate ascending
-                          select v;
-
-                values = cvs?.ToList();
+                                (v.OnDate <= toDate))
+                    .OrderBy(v => v.OnDate)
+                    .ToList();
             }
 
             return values;
@@ -92,32 +87,27 @@ namespace CbrFT.DbModel
                 }
                 catch (Exception ex) when (ex is ArgumentNullException || ex is FormatException) { }
 
-                var cs = from c in context.Currencies
-                         select c;
-
                 foreach (DataRow row in rows)
                 {
                     Currency currency = CurrencyBuilder.Create(row);
 
                     // check if we suddenly got a new currency
-                    var cur = from c in cs
-                              where c.Vcode == currency.Vcode
-                              select c;
-
-                    Currency dbc = cur.SingleOrDefault();
+                    Currency dbc = context.Currencies
+                        .Where(c => c.Vcode == currency.Vcode)
+                        .SingleOrDefault();
 
                     if (dbc == null)
                         context.Currencies.Add(currency);
                     else
                         currency = dbc;
 
-                    // add currency value if we dont have one on given date
-                    var vs = from v in context.CurrencyValues
-                             where  (v.Currency.Vcode == currency.Vcode) &&
-                                    (v.OnDate == onDate)
-                             select v;
+                    // add currency value if we dont have one on the given date
+                    var vs = context.CurrencyValues
+                        .Where(v => (v.Currency.Vcode == currency.Vcode) &&
+                                    (v.OnDate == onDate))
+                        .SingleOrDefault();
 
-                    if (vs.SingleOrDefault() == null)
+                    if (vs == null)
                     {
                         CurrencyValue val = new CurrencyValue();
                         val.Currency = currency;
